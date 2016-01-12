@@ -3,8 +3,18 @@
   <head>
     <title>Demo</title>
     <meta charset="UTF-8" />
+    <script src="../dist/js-performance-measurer.min.js"></script>
   </head>
   <body>
-    <h1>Demo</h1>
+    <h1>Demo!</h1>
+    <script>
+      var testCandidate = function () {
+        console.log('Hello World!');
+      };
+
+      de.bennyn.tracking.PerformanceMeasurer.measure(testCandidate);
+
+      console.log('Result: ' + de.bennyn.tracking.PerformanceMeasurer.getMeasurement());
+    </script>
   </body>
 </html>

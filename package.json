@@ -1,6 +1,6 @@
 {
   "name": "js-performance-measurer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "devDependencies": {
     "coffeelint": "^1",
     "glob": "5.0.15",

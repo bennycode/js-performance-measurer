@@ -10,21 +10,29 @@ window.de.bennyn.tracking.PerformanceMeasurer = (function () {
 
   var iterations = 10;
 
+  var measurement = undefined;
+
   return {
     setIterations: function (value) {
       iterations = value;
     },
+    getMeasurement: function () {
+      return measurement;
+    },
     measure: function (testCandidate) {
       var measurements = [];
+      var returnValue = undefined;
 
       if (typeof testCandidate === 'function') {
         for (var i = 0; i < iterations; i++) {
           var start = (window.performance || window.Date).now();
-          testCandidate();
+          returnValue = testCandidate();
           var stop = (window.performance || window.Date).now();
           measurements.push(stop - start);
         }
-        return window.parseFloat(median(measurements).toFixed(4));
+
+        measurement = window.parseFloat(median(measurements).toFixed(4));
+        return returnValue;
       } else {
         var error = new Error('You have to provide a function to be measured.');
         console.error(error);
