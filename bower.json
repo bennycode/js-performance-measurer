@@ -1,0 +1,11 @@
+{
+  "name": "js-performance-measurer",
+  "description": "",
+  "main": "dist/js-performance-measurer.min.js",
+  "keywords": [],
+  "dependencies": {},
+  "ignore": [
+    "*",
+    "!dist/*"
+  ]
+}
