@@ -1,9 +1,12 @@
 {
   "name": "js-performance-measurer",
   "description": "",
-  "main": "dist/js-performance-measurer.min.js",
+  "main": "dist/js-performance-measurer.js",
   "keywords": [],
   "dependencies": {},
+  "devDependencies": {
+    "libsodium.js": "git://github.com/jedisct1/libsodium.js.git#0.2.9"
+  },
   "ignore": [
     "*",
     "!dist/*"

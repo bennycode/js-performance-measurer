@@ -4,13 +4,18 @@ window.de.bennyn.tracking = window.de.bennyn.tracking || {};
 
 window.de.bennyn.tracking.PerformanceMeasurer = (function () {
   var median = function (sequence) {
-    sequence.sort();
-    return sequence[Math.ceil(sequence.length / 2)];
+    if (sequence.length === 1) {
+      return sequence[0];
+    } else {
+      sequence.sort();
+      return sequence[Math.ceil(sequence.length / 2)];
+    }
   };
 
   var iterations = 10;
-
   var measurement = undefined;
+  var start = undefined;
+  var stop = undefined;
 
   return {
     setIterations: function (value) {
@@ -25,9 +30,9 @@ window.de.bennyn.tracking.PerformanceMeasurer = (function () {
 
       if (typeof testCandidate === 'function') {
         for (var i = 0; i < iterations; i++) {
-          var start = (window.performance || window.Date).now();
+          start = (window.performance || window.Date).now();
           returnValue = testCandidate();
-          var stop = (window.performance || window.Date).now();
+          stop = (window.performance || window.Date).now();
           measurements.push(stop - start);
         }
 

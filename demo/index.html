@@ -3,7 +3,8 @@
   <head>
     <title>Demo</title>
     <meta charset="UTF-8" />
-    <script src="../dist/js-performance-measurer.min.js"></script>
+    <script src="../src/main/js/PerformanceMeasurer.js"></script>
+    <script src="libs/libsodium.js/sodium.min.js"></script>
   </head>
   <body>
     <h1>Demo!</h1>
@@ -12,9 +13,41 @@
         console.log('Hello World!');
       };
 
-      de.bennyn.tracking.PerformanceMeasurer.measure(testCandidate);
+      var asyncTestCandidate = function () {
+        var xhr = new XMLHttpRequest();
+        var url = 'http://www.welovecoding.com/rest/service/v1/categories';
+        xhr.open('GET', url, true);
 
-      console.log('Result: ' + de.bennyn.tracking.PerformanceMeasurer.getMeasurement());
+        xhr.onload = function (error) {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+            } else {
+              console.error(xhr.statusText);
+            }
+          }
+        };
+
+        xhr.onerror = function (error) {
+          console.error(xhr.statusText);
+        };
+
+        xhr.send(null);
+      };
+
+      var time = undefined;
+
+      de.bennyn.tracking.PerformanceMeasurer.setIterations(1);
+
+      de.bennyn.tracking.PerformanceMeasurer.measure(testCandidate);
+      time = de.bennyn.tracking.PerformanceMeasurer.getMeasurement();
+      console.log(time);
+
+      de.bennyn.tracking.PerformanceMeasurer.measure(sodium.crypto_sign_keypair);
+      time = de.bennyn.tracking.PerformanceMeasurer.getMeasurement();
+      console.log(time);
+
+      // asyncTestCandidate();
     </script>
   </body>
 </html>
